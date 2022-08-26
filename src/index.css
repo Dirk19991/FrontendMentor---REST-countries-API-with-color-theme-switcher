@@ -15,7 +15,7 @@
   --fw-bold: 800;
 
   /* Other */
-  --radii: 0.5rem;
+  --radius: 0.5rem;
 }
 
 body[data-theme='dark'] {
