@@ -32,7 +32,13 @@ const CardList = styled.ul`
   padding: 1rem 0 0;
 `;
 
-const CardListItem = styled.li``;
+const CardListItem = styled.li`
+  font-size: var(--fs-sm);
+
+  & > b {
+    font-weight: var(--fw-bold);
+  }
+`;
 
 export const Card = ({ img, name, info = [], onClick }) => {
   console.log(img);
