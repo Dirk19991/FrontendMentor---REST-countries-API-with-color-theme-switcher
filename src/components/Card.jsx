@@ -34,6 +34,8 @@ const CardList = styled.ul`
 
 const CardListItem = styled.li`
   font-size: var(--fs-sm);
+  line-heigth: 1.5;
+  font-weight: var(--fw-light);
 
   & > b {
     font-weight: var(--fw-bold);
@@ -41,7 +43,6 @@ const CardListItem = styled.li`
 `;
 
 export const Card = ({ img, name, info = [], onClick }) => {
-  console.log(img);
   return (
     <Wrapper onClick={onClick}>
       <CardImage src={img} alt={name} />
