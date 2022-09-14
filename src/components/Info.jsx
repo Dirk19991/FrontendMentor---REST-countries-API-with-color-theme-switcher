@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { filterByCode } from '../config';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -27,6 +30,7 @@ const InfoImage = styled.img`
 
 const InfoTitle = styled.h1`
   margin: 0;
+  margin-bottom: 1rem;
   font-weigth: var(--fw-normal);
 `;
 
@@ -95,11 +99,27 @@ export const Info = ({
   region,
   subregion,
   topLevelDomain,
-  curriencies = [],
+  currencies = [],
   languages = [],
   borders = [],
-  push,
+  navigate,
 }) => {
+  const [neighbors, setNeighbors] = useState([]);
+  useEffect(() => {
+    if (borders.length) {
+      axios
+        .get(filterByCode(borders))
+        .then(({ data }) => setNeighbors(data.map((country) => country.name)));
+    }
+  }, [borders]);
+
+  console.log(
+    languages
+      .map((language) => language.name)
+      .join(', ')
+      .split(' ')
+  );
+
   return (
     <Wrapper>
       <InfoImage src={flag} alt={name} />
@@ -128,21 +148,41 @@ export const Info = ({
           <List>
             <ListItem>
               <b>Top Level Domain:</b>{' '}
-              {topLevelDomain.map((domain) => (
-                <span key={domain}>{domain}</span>
-              ))}
+              {topLevelDomain.length < 2
+                ? topLevelDomain.map((domain) => (
+                    <span key={domain}>{domain}</span>
+                  ))
+                : topLevelDomain
+                    .join(', ')
+                    .split('')
+                    .map((domain, index) => <span key={index}>{domain}</span>)}
             </ListItem>
             <ListItem>
               <b>Currency:</b>{' '}
-              {curriencies.map((currency) => (
-                <span key={currency.code}>{currency.name}</span>
-              ))}
+              {currencies.length < 2
+                ? currencies.map((currency) => (
+                    <span key={currency.code}>{currency.name}</span>
+                  ))
+                : currencies
+                    .join(', ')
+                    .split('')
+                    .map((currency) => (
+                      <span key={currency.code}>{currency.name}</span>
+                    ))}
             </ListItem>
             <ListItem>
-              <b>Top Level Domain:</b>{' '}
-              {languages.map((language) => (
-                <span key={language.name}>{language.name}</span>
-              ))}
+              <b>Languages:</b>{' '}
+              {languages.length < 2
+                ? languages.map((language) => (
+                    <span key={language.name}>{language.name}</span>
+                  ))
+                : languages
+                    .map((language) => language.name)
+                    .join(', ')
+                    .split('')
+                    .map((language, index) => (
+                      <span key={index}>{language}</span>
+                    ))}
             </ListItem>
           </List>
         </ListGroup>
@@ -152,8 +192,10 @@ export const Info = ({
             <span>There are no countries that border this country</span>
           ) : (
             <TagGroup>
-              {borders.map((b) => (
-                <Tag key={b}>{b}</Tag>
+              {neighbors.map((b) => (
+                <Tag key={b} onClick={() => navigate(`/country/${b}`)}>
+                  {b}
+                </Tag>
               ))}
             </TagGroup>
           )}
