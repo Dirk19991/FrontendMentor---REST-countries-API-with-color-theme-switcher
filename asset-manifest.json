@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/FrontendMentor---REST-countries-API-with-color-theme-switcher/static/css/main.e01f054d.css",
-    "main.js": "/FrontendMentor---REST-countries-API-with-color-theme-switcher/static/js/main.bd272c03.js",
+    "main.js": "/FrontendMentor---REST-countries-API-with-color-theme-switcher/static/js/main.2b5cf4d3.js",
     "index.html": "/FrontendMentor---REST-countries-API-with-color-theme-switcher/index.html",
     "main.e01f054d.css.map": "/FrontendMentor---REST-countries-API-with-color-theme-switcher/static/css/main.e01f054d.css.map",
-    "main.bd272c03.js.map": "/FrontendMentor---REST-countries-API-with-color-theme-switcher/static/js/main.bd272c03.js.map"
+    "main.2b5cf4d3.js.map": "/FrontendMentor---REST-countries-API-with-color-theme-switcher/static/js/main.2b5cf4d3.js.map"
   },
   "entrypoints": [
     "static/css/main.e01f054d.css",
-    "static/js/main.bd272c03.js"
+    "static/js/main.2b5cf4d3.js"
   ]
 }
