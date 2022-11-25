@@ -11,7 +11,38 @@ import {
   Tag,
   TagGroup,
 } from './InfoStyles';
-import { setNeighborss } from './neighborsSlice';
+import { setNeighbors } from './neighborsSlice';
+import { RootState } from '../../app/store';
+import { AppDispatch } from '../../app/store';
+import { NavigateFunction } from 'react-router-dom';
+
+interface Currency {
+  code: string;
+  name: string;
+  symbol: string;
+}
+
+interface Language {
+  iso639_1: string;
+  iso639_2: string;
+  name: string;
+  nativeName: string;
+}
+
+interface InfoProps {
+  name: string;
+  nativeName: string;
+  flag: string;
+  capital: string;
+  population: number;
+  region: string;
+  subregion: string;
+  topLevelDomain: string[];
+  currencies: Currency[];
+  languages: Language[];
+  borders: string[];
+  navigate: NavigateFunction;
+}
 
 export const Info = ({
   name,
@@ -26,15 +57,23 @@ export const Info = ({
   languages = [],
   borders = [],
   navigate,
-}) => {
-  const neighbors = useSelector((state) => state.neighbors.neighbors);
+}: InfoProps) => {
+  const neighbors = useSelector(
+    (state: RootState) => state.neighbors.neighbors
+  );
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     if (borders.length) {
-      dispatch(setNeighborss(borders));
+      dispatch(setNeighbors(borders));
     }
   }, [borders, dispatch]);
+
+  console.log(
+    currencies.reduce((acc, elem, index) => {
+      return index === 0 ? acc : acc + ', ' + elem.name;
+    }, currencies[0].name)
+  );
 
   return (
     <Wrapper>
@@ -79,12 +118,17 @@ export const Info = ({
                 ? currencies.map((currency) => (
                     <span key={currency.code}>{currency.name}</span>
                   ))
-                : currencies
-                    .join(', ')
-                    .split('')
-                    .map((currency) => (
-                      <span key={currency.code}>{currency.name}</span>
-                    ))}
+                : currencies.map((currency, index) =>
+                    index === 0 ? (
+                      <span key={currency.code}>
+                        {currencies.reduce((acc, elem, index) => {
+                          return index === 0 ? acc : acc + ', ' + elem.name;
+                        }, currencies[0].name)}
+                      </span>
+                    ) : (
+                      ''
+                    )
+                  )}
             </ListItem>
             <ListItem>
               <b>Languages:</b>{' '}

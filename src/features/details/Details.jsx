@@ -3,8 +3,8 @@ import { Oval } from 'react-loader-spinner';
 import { useEffect } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 import { Wrapper } from './DetailsStyles';
-import { Button } from './Button';
-import { Info } from './Info';
+import { Button } from './Button.tsx';
+import { Info } from './Info.tsx';
 import { setCountry } from './detailsSlice';
 import { useDispatch, useSelector } from 'react-redux';
 

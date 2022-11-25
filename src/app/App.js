@@ -4,7 +4,7 @@ import { Header } from '../features/homepage/header/Header';
 import { Main } from '../features/homepage/Main';
 import { Homepage } from '../features/homepage/Homepage';
 import { Details } from '../features/details/Details';
-import { NotFound } from '../features/notFound/NotFound';
+import { NotFound } from '../features/notFound/NotFound.tsx';
 
 function App() {
   return (
