@@ -4,6 +4,9 @@ import { CustomSelect } from './CustomSelect';
 import { Wrapper } from './ControlsStyles';
 import { useSelector, useDispatch } from 'react-redux';
 import { setRegion } from './searchSlice';
+import { RootState } from '../../../app/store';
+import { ActionMeta } from 'react-select';
+
 const options = [
   { value: 'Africa', label: 'Africa' },
   { value: 'America', label: 'America' },
@@ -12,11 +15,27 @@ const options = [
   { value: 'Oceania', label: 'Oceania' },
 ];
 
-export const Controls = ({ onSearch }) => {
-  const searchValue = useSelector((state) => state.search.search);
-  const regionValue = useSelector((state) => state.search.region);
+interface ControlsProps {
+  onSearch: (search?: string, region?: string) => void;
+}
+
+interface SelectEvent {
+  value?: string;
+  label?: string;
+}
+
+export const Controls = ({ onSearch }: ControlsProps) => {
+  const searchValue = useSelector((state: RootState) => state.search.search);
+  const regionValue = useSelector((state: RootState) => state.search.region);
 
   const dispatch = useDispatch();
+
+  const handleChange = (
+    option: SelectEvent | null,
+    actionMeta: ActionMeta<SelectEvent>
+  ) => {
+    dispatch(setRegion(option ? option.value : ''));
+  };
 
   useEffect(() => {
     onSearch(searchValue, regionValue);
@@ -29,9 +48,7 @@ export const Controls = ({ onSearch }) => {
         placeholder='Filter by region'
         isClearable
         isSearchable={false}
-        onChange={(e) => {
-          dispatch(setRegion(e === null ? '' : e.value));
-        }}
+        onChange={() => handleChange}
       />
     </Wrapper>
   );

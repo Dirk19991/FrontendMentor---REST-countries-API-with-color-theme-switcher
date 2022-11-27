@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import Select from 'react-select';
+import Select, { CSSObjectWithLabel } from 'react-select';
+import { OptionProps } from 'react-select';
+import { GroupBase } from 'react-select';
 
 export const CustomSelect = styled(Select).attrs({
   styles: {
-    control: (provided) => ({
+    control: (provided: CSSObjectWithLabel) => ({
       ...provided,
       backgroundColor: 'var(--colors-ui-base)',
       color: 'var(--colors-text)',
@@ -13,7 +15,10 @@ export const CustomSelect = styled(Select).attrs({
       boxShadow: 'var(--shadow)',
       height: '50px',
     }),
-    option: (provided, state) => ({
+    option: (
+      provided: CSSObjectWithLabel,
+      state: OptionProps<unknown, boolean, GroupBase<unknown>>
+    ) => ({
       ...provided,
       cursor: 'pointer',
       color: 'var(--colors-text)',
@@ -21,11 +26,11 @@ export const CustomSelect = styled(Select).attrs({
         ? 'var(--colors-bg)'
         : 'var(--colors-ui-base)',
     }),
-    clearIndicator: (styles) => ({
+    clearIndicator: (styles: CSSObjectWithLabel) => ({
       ...styles,
       cursor: 'pointer',
     }),
-    dropdownIndicator: (styles) => ({
+    dropdownIndicator: (styles: CSSObjectWithLabel) => ({
       ...styles,
       cursor: 'pointer',
     }),

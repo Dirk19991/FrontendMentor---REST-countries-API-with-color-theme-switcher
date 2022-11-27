@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface ListProps {
+  children: React.ReactNode;
+}
+
 const Wrapper = styled.section`
   width: 100%;
   padding: 2rem 0;
@@ -21,6 +25,6 @@ const Wrapper = styled.section`
   }
 `;
 
-export const List = ({ children }) => {
+export const List = ({ children }: ListProps) => {
   return <Wrapper>{children}</Wrapper>;
 };

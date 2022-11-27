@@ -9,8 +9,8 @@ interface Neighbor {
 
 export const setNeighbors = createAsyncThunk<string[], string[]>(
   'neighbors/setNeighbors',
-  async (borders) => {
-    const neighbors = await axios.get(filterByCode(borders));
+  async (borders: string[]) => {
+    const neighbors = await axios.get(filterByCode(...borders));
     const neighborsNames = neighbors.data.map((elem: Neighbor) => elem.name);
 
     return neighborsNames;

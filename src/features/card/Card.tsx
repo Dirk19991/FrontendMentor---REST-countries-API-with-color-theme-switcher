@@ -42,7 +42,19 @@ const CardListItem = styled.li`
   }
 `;
 
-export const Card = ({ img, name, info = [], onClick }) => {
+interface CoutryInfo {
+  title: string;
+  description: string;
+}
+
+interface CardProps {
+  img: string;
+  name: string;
+  info: CoutryInfo[];
+  onClick: () => void;
+}
+
+export const Card = ({ img, name, info = [], onClick }: CardProps) => {
   return (
     <Wrapper onClick={onClick}>
       <CardImage src={img} alt={name} />

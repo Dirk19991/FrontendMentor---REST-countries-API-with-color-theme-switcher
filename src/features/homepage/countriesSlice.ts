@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { ALL_COUNTRIES } from '../../config';
+import { Country } from '../details/detailsSlice';
 
 export const fetchCountries = createAsyncThunk(
   'countries/fetchCountries',
@@ -10,12 +11,18 @@ export const fetchCountries = createAsyncThunk(
   }
 );
 
+interface Countries {
+  countries: Country[];
+  filteredCountries: Country[];
+}
+const initialState: Countries = {
+  countries: [],
+  filteredCountries: [],
+};
+
 const countriesSlice = createSlice({
   name: 'countries',
-  initialState: {
-    countries: [],
-    filteredCountries: [],
-  },
+  initialState,
   reducers: {
     filterCountries(state, action) {
       state.filteredCountries = action.payload;

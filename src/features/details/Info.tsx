@@ -29,7 +29,7 @@ interface Language {
   nativeName: string;
 }
 
-interface InfoProps {
+export interface InfoProps {
   name: string;
   nativeName: string;
   flag: string;

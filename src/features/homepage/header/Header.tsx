@@ -5,11 +5,12 @@ import { Container } from '../Container';
 import { IoMoonOutline, IoMoon } from 'react-icons/io5';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeTheme } from './themeSlice';
+import { RootState } from '../../../app/store';
 
 export const Header = () => {
   const dispatch = useDispatch();
 
-  const theme = useSelector((state) => state.theme.theme);
+  const theme = useSelector((state: RootState) => state.theme.theme);
 
   const toggleTheme = () =>
     dispatch(changeTheme(theme === 'light' ? 'dark' : 'light'));

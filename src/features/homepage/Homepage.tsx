@@ -2,25 +2,28 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchCountries } from './countriesSlice';
 import { Controls } from './searchFilterPanel/Controls';
-
 import { List } from './List';
 import { Card } from '../card/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterCountries } from './countriesSlice';
-import React from 'react';
+import { RootState } from '../../app/store';
 import { useCallback } from 'react';
+import { AppDispatch } from '../../app/store';
 
 export const Homepage = () => {
-  const countries = useSelector((state) => state.countries.countries);
+  const countries = useSelector(
+    (state: RootState) => state.countries.countries
+  );
   const filteredCountries = useSelector(
-    (state) => state.countries.filteredCountries
+    (state: RootState) => state.countries.filteredCountries
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   let navigate = useNavigate();
 
   const handleSearch = useCallback(
-    (search, region) => {
+    (search?: string, region?: string) => {
+      console.log(search, region);
       let data = countries;
 
       if (region) {
@@ -41,14 +44,11 @@ export const Homepage = () => {
     if (!countries.length) {
       dispatch(fetchCountries());
     }
-
-    // eslint-disable-next-line
-  }, []);
+  }, [countries.length, dispatch]);
 
   useEffect(() => {
     handleSearch();
-    // eslint-disable-next-line
-  }, [countries]);
+  }, [countries, handleSearch]);
 
   return (
     <>
