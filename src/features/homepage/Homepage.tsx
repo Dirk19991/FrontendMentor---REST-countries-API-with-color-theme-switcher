@@ -23,7 +23,6 @@ export const Homepage = () => {
 
   const handleSearch = useCallback(
     (search?: string, region?: string) => {
-      console.log(search, region);
       let data = countries;
 
       if (region) {

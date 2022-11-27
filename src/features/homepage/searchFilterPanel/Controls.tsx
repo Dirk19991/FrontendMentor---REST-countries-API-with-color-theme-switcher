@@ -48,7 +48,8 @@ export const Controls = ({ onSearch }: ControlsProps) => {
         placeholder='Filter by region'
         isClearable
         isSearchable={false}
-        onChange={() => handleChange}
+        // @ts-ignore
+        onChange={handleChange}
       />
     </Wrapper>
   );
