@@ -69,12 +69,6 @@ export const Info = ({
     }
   }, [borders, dispatch]);
 
-  console.log(
-    currencies.reduce((acc, elem, index) => {
-      return index === 0 ? acc : acc + ', ' + elem.name;
-    }, currencies[0].name)
-  );
-
   return (
     <Wrapper>
       <InfoImage src={flag} alt={name} />
