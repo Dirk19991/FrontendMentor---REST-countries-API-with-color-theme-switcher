@@ -24,3 +24,11 @@
 4. Реализованы темная и светлая темы:
 <img src="https://user-images.githubusercontent.com/104031523/204246338-895e9d88-8a6d-42db-b477-df5536503306.gif" alt="Alt text" title="Optional title" width=70% height=70%>
 
+## Инструкция по установке
+
+```
+git clone https://github.com/Dirk19991/World-info.git
+cd .\World-info\
+npm install
+npm start
+```
